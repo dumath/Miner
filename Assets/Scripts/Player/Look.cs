@@ -4,35 +4,30 @@ using UnityEngine;
 
 public class Look : MonoBehaviour
 {
-    #region Fields
-    [SerializeField] private GameObject pimp;
-
-    private float minVer = -80.0f; // ћинимальное значение угла(вертикальное вращение).
-    private float maxVer = 80.0f; // ћаксимальное значение угла(вертикальное вращение).
-
-    private float sensativity = 9.0f; // —корость вращени€ коробл€ на плоскости.
-    private float deltaX; // ¬еличина изменени€ по оси X.
-    private float deltaY; // ¬еличина изменени€ по оси Y.
-    #endregion
-
+    private float sensativity = 10.0f; //TODO: «аменить на значение стика.
+    private float minVer = -45.0f;
+    private float maxVer = 45.0f;
+    private float rotationX = 0;
     // Start is called before the first frame update
     void Start()
     {
-        deltaX = 0.0f;
-        deltaY = 0.0f;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (pimp.GetComponent<Stick>().IsActivated())
-        {
-            deltaX -= Input.GetAxis("Mouse Y") * sensativity;
-            deltaX = Mathf.Clamp(deltaX, minVer, maxVer);
-            float delta = Input.GetAxis("Mouse X") * sensativity;
-            deltaY = transform.localEulerAngles.y + delta;
-            transform.eulerAngles = new Vector3(deltaX, deltaY, 0);
-        }
+        
+        
     }
-    
+
+    public void OnMouseDrag(float speed)
+    {
+        rotationX -= Input.GetAxis("Mouse Y") * sensativity;
+        rotationX = Mathf.Clamp(rotationX, minVer, maxVer);
+        float delta = Input.GetAxis("Mouse X") * sensativity;
+        float rotationY = transform.localEulerAngles.y + delta;
+        Vector3 newRotation = new Vector3(rotationX, rotationY, 0);
+        transform.localEulerAngles = newRotation;
+    }
 }
