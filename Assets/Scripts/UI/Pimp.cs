@@ -10,11 +10,9 @@ public class Pimp : MonoBehaviour
     private float radius;
     private float distance;
     private float _speed;
-
+    public static float sensativityX; //DEBUG
+    public static float sensativityY; //DEBUG
     
-
-    [Range(0f, 40f)]
-    public float sensativity = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +20,6 @@ public class Pimp : MonoBehaviour
         centerPoint = transform.position;
         _speed = Vector3.Distance(centerPoint, transform.position);
         radius = GetComponent<CircleCollider2D>().radius * 1.4f;
-
     }
 
     // Update is called once per frame
@@ -37,7 +34,6 @@ public class Pimp : MonoBehaviour
     {
         currentColor = GetComponent<Image>().color;
         GetComponent<Image>().color = Color.cyan;
-        
     }
 
     public void OnMouseExit()
@@ -50,14 +46,16 @@ public class Pimp : MonoBehaviour
         Vector3 newPosition = Input.mousePosition;
         newPosition = Vector3.MoveTowards(centerPoint, newPosition, radius);
         transform.position = newPosition;
-        sensativity = Vector3.Distance(centerPoint, newPosition);
+        sensativityX = transform.position.x - centerPoint.x;
+        sensativityY = transform.position.y - centerPoint.y;
     }
 
     public void OnMouseUp()
     {
         transform.position = centerPoint;
-        sensativity = Vector3.Distance(centerPoint, transform.position);
-    }
+        sensativityX = 0;
+        sensativityY = 0;
+    }  
     #endregion
 
 }

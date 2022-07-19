@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Look : MonoBehaviour
 {
-    private float sensativity = 10.0f; //TODO: Заменить на значение стика.
     private float minVer = -45.0f;
     private float maxVer = 45.0f;
     private float rotationX = 0;
+    private float sensativityX = 0;
+    private float sensativityY = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,17 +18,18 @@ public class Look : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        
-    }
 
-    public void OnMouseDrag(float speed)
-    {
-        rotationX -= Input.GetAxis("Mouse Y") * sensativity;
+        rotationX -= Pimp.sensativityY/100;
         rotationX = Mathf.Clamp(rotationX, minVer, maxVer);
-        float delta = Input.GetAxis("Mouse X") * sensativity;
+        float delta = Pimp.sensativityX/100;
         float rotationY = transform.localEulerAngles.y + delta;
         Vector3 newRotation = new Vector3(rotationX, rotationY, 0);
         transform.localEulerAngles = newRotation;
+    }
+
+    public void LookSensativity(float sensativityX, float sensativityY)
+    {
+        this.sensativityX = sensativityX;
+        this.sensativityY = sensativityY;
     }
 }
