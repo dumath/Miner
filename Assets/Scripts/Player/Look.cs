@@ -19,17 +19,21 @@ public class Look : MonoBehaviour
     void Update()
     {
 
-        rotationX -= Pimp.sensativityY/100;
+        rotationX -= sensativityY/100;
         rotationX = Mathf.Clamp(rotationX, minVer, maxVer);
-        float delta = Pimp.sensativityX/100;
+        float delta = sensativityX/100;
         float rotationY = transform.localEulerAngles.y + delta;
         Vector3 newRotation = new Vector3(rotationX, rotationY, 0);
         transform.localEulerAngles = newRotation;
     }
 
-    public void LookSensativity(float sensativityX, float sensativityY)
+    public void LookSensativityX(float x)
     {
-        this.sensativityX = sensativityX;
-        this.sensativityY = sensativityY;
+        this.sensativityX = x;
+    }
+
+    public void LookSensativityY(float y)
+    {
+        this.sensativityY = y;
     }
 }
