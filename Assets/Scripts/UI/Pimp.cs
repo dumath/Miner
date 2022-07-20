@@ -14,8 +14,10 @@ public class Pimp : MonoBehaviour
     private float radius; //Радиус объекта "Pimp".
     private float sensativityX; //Скорость вращения по оси X, на основе положения объекта "Pimp".
     private float sensativityY; //Скорость вращения по оси Y, на основе положения объекта "Pimp"
+    public float Sensativity = 100.0f; //Делитель скорости. 
     #endregion
 
+    #region Awake, Start, Update, LateUpdate
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,7 @@ public class Pimp : MonoBehaviour
     {
         
     }
+    #endregion
 
     #region Mouse Events
     /// <summary>
@@ -78,8 +81,8 @@ public class Pimp : MonoBehaviour
     {
         if (sensativityYEvent.GetPersistentEventCount() == 0 && sensativityXEvent.GetPersistentEventCount() == 0)
             return;
-        sensativityXEvent.Invoke(sensativityX);
-        sensativityYEvent.Invoke(sensativityY);
+        sensativityXEvent.Invoke(sensativityX / Sensativity);
+        sensativityYEvent.Invoke(sensativityY / Sensativity);
     }
     #endregion
 
