@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Pimp : MonoBehaviour
+public class Pimp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
     //Завершено.
     //TODO:Подправить. Позаимствовано у Unity Slider.
@@ -36,7 +37,7 @@ public class Pimp : MonoBehaviour
     /// <summary>
     /// Срабатывает, при наведении мышки на объект "Pimp". Изменяет цвет.
     /// </summary>
-    public void OnMouseEnter()
+    public void OnPointerEnter(PointerEventData eventData)
     {
         currentColor = GetComponent<Image>().color;
         GetComponent<Image>().color = Color.cyan;
@@ -45,7 +46,7 @@ public class Pimp : MonoBehaviour
     /// <summary>
     /// Срабатывает при выходе мышке из объекта "Pimp". Возвращает цвет на исходный.
     /// </summary>
-    public void OnMouseExit()
+    public void OnPointerExit(PointerEventData eventData)
     {
         GetComponent<Image>().color = currentColor;
     }
@@ -53,7 +54,7 @@ public class Pimp : MonoBehaviour
     /// <summary>
     /// Срабатывает при перетаскивании объекта "Pimp". Задает скорость вращения связанного SliderEvent объекта.
     /// </summary>
-    public void OnMouseDrag()
+    public void OnDrag(PointerEventData eventData)
     {
         Vector3 newPosition = Input.mousePosition;
         newPosition = Vector3.MoveTowards(centerPoint, newPosition, radius);
@@ -66,13 +67,13 @@ public class Pimp : MonoBehaviour
     /// <summary>
     /// Срабатывает при отпуске кнопки мыши. Возвращает объект "Pimp" в исходное положение и останавливает вращение объекта.
     /// </summary>
-    public void OnMouseUp()
+    public void OnPointerUp(PointerEventData eventData)
     {
         transform.position = centerPoint;
         sensativityX = 0;
         sensativityY = 0;
         OnSensativityChanged();
-    }  
+    }
 
     /// <summary>
     /// Вспомогательный метод события Slider.SliderEvent.
@@ -83,6 +84,15 @@ public class Pimp : MonoBehaviour
             return;
         sensativityXEvent.Invoke(sensativityX / Sensativity);
         sensativityYEvent.Invoke(sensativityY / Sensativity);
+    }
+
+    /// <summary>
+    /// Парная реализация.
+    /// </summary>
+    /// <param name="eventData"></param>
+    public void OnPointerDown(PointerEventData eventData)
+    {
+
     }
     #endregion
 
