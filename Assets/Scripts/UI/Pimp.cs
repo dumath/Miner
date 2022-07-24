@@ -5,10 +5,8 @@ using UnityEngine.EventSystems;
 public class Pimp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
     //Завершено.
-    //TODO:Подправить. Позаимствовано у Unity Slider.
-    public Slider.SliderEvent sensativityXEvent;
-    public Slider.SliderEvent sensativityYEvent;
-
+    //Привести в упаковочный вид.
+    
     #region Fields
     private Color currentColor; //Действующий цвет до наведения мышки на объект "Pimp".
     private Vector3 centerPoint; //Центральное положение объекта "Pimp".
@@ -16,6 +14,8 @@ public class Pimp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
     private float sensativityX; //Скорость вращения по оси X, на основе положения объекта "Pimp".
     private float sensativityY; //Скорость вращения по оси Y, на основе положения объекта "Pimp"
     public float Sensativity = 100.0f; //Делитель скорости. 
+    public UnityEngine.Events.UnityEvent<float> sensativityXEvent; // Срабатывает при изменение позиции "Pimp" по оси Х.
+    public UnityEngine.Events.UnityEvent<float> sensativityYEvent; // Срабатывает при изменении позции "Pimp" по оси Y.
     #endregion
 
     #region Awake, Start, Update, LateUpdate
@@ -92,7 +92,7 @@ public class Pimp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
     /// <param name="eventData"></param>
     public void OnPointerDown(PointerEventData eventData)
     {
-
+        centerPoint = transform.position;
     }
     #endregion
 

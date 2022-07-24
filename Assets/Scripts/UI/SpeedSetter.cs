@@ -5,18 +5,17 @@ using UnityEngine.EventSystems;
 public class SpeedSetter : MonoBehaviour, IDragHandler
 {
     //Completed.
-    //TODO: Убрать SliderEvent
     //TODO: Привести в упаковочный вид.
 
     #region Fields
-    private RectTransform slider; // Форма слайдера, при изменении скорости, меняется форма(размер).
-    private Image sliderColor; // Палитра скорости, при высоких значениях, меняет цвет.
-    public Slider.SliderEvent OnValueChange; // Позаимствовано у Slider. Для отправки значения текущей скорости, установленной пользователем.
+    private RectTransform slider; // Форма слайдера, при изменении скорости, размер.
+    private Image sliderColor; // Палитра скорости, при разных значениях меняет цвет.
+    public UnityEngine.Events.UnityEvent<float> OnValueChange; //Срабатывает при изменение слайдера скорости. Передает объекту "Player" значение сокрости.
     private float bottomEdge; // Нижняя грань формы "Slider".
     private float minHeightDrag; // Минимальный размер формы по оси Y.
     private float maxHeightDrag; // Масимальный размер формы по оси Y.
-    public Color MinimalColor;
-    public Color MaximalColor;
+    public Color MinimalColor; // Цвет "SpeedSetter" при минимальных значениях.
+    public Color MaximalColor; // Цвет "SpeedSetter" при максимальных значениях.
     #endregion
 
     #region Awake, Start, Update, LateUpdate
@@ -28,8 +27,6 @@ public class SpeedSetter : MonoBehaviour, IDragHandler
         bottomEdge = slider.position.y + slider.rect.yMin;
         minHeightDrag = bottomEdge * 2;
         maxHeightDrag = slider.rect.height;
-        Debug.Log(minHeightDrag);
-        Debug.Log(maxHeightDrag);
         slider.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Bottom, bottomEdge, minHeightDrag);
     }
 
@@ -50,8 +47,6 @@ public class SpeedSetter : MonoBehaviour, IDragHandler
     private Color changeColor(Color currentColor, float offSet)
     {
         currentColor = Color.Lerp(MinimalColor, MaximalColor, offSet);
-        //currentColor.g = -offSet;
-        //currentColor.r = offSet*2;
         return currentColor;
     }
 
@@ -61,6 +56,7 @@ public class SpeedSetter : MonoBehaviour, IDragHandler
     /// <param name="eventData"> Данные события. </param>
     public void OnDrag(PointerEventData eventData)
     {
+        // TODO: Убрать магические числа.
         float posYPalitra = (transform.InverseTransformDirection(Input.mousePosition).y - 200)/100;
         sliderColor.color = changeColor(sliderColor.color, posYPalitra);
         float h = Input.mousePosition.y;
