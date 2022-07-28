@@ -248,7 +248,7 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{inproject}: mainerKey.keystore'
+  AndroidKeystoreName: D:/LearnUnity/kkssunity/mainerKey.keystore
   AndroidKeyaliasName: powereddumah
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0

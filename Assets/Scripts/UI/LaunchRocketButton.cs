@@ -4,19 +4,22 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class LaunchRocketButton : MonoBehaviour , IPointerClickHandler
+public class LaunchRocketButton : MonoBehaviour, IPointerClickHandler
 {
-    public int clip = 3;
-    private const float PALITRA = 1.0f;
-    public float ReloadTime = 5.0f;
-    private Image clipSkin;
-    public Color emptyClip;
-    public Color fullClip;
-    public RocketLauncherEvent RCE;
+    //DEBUG
+    public int fullClip = 4; // Полная обойма.
+    public int currentRocketsInClip; // Сколько осталось в обойме.
+    public float reloadTime = 10.0f; // Время перезарядки.
+    public float preparationTime = 5.0f; // Время подготовки ракеты после выпуска.
+    private Image clipSkin; //Изображение обоймы в UI.
+    public Color emptyClipColor; // Цвет пустой обоймы.
+    public Color fullClipColor; // Цвет полной обоймы.
+    [SerializeField] private UnityEngine.Events.UnityEvent LaunchEvent; // Связанное событие с Click.
 
     // Start is called before the first frame update
     void Start()
     {
+        currentRocketsInClip = fullClip;
         clipSkin = GetComponent<Image>();
     }
 
@@ -28,31 +31,29 @@ public class LaunchRocketButton : MonoBehaviour , IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(clip == 0)
+        if (currentRocketsInClip != 0)
         {
-            clipSkin.color = fullClip;
-            clip = 3;
-            StartCoroutine(reloading(ReloadTime));
+            LaunchEvent.Invoke();
+            clipSkin.color = Color.Lerp(fullClipColor, emptyClipColor, 1.0f / currentRocketsInClip);
+            StartCoroutine(Launch(preparationTime));
+            currentRocketsInClip--;
         }
         else
         {
-            float offset = PALITRA / clip;
-            clip--;
-            RCE.Invoke(1.0f);
-            clipSkin.color = Color.Lerp(fullClip, emptyClip, offset);
+            clipSkin.color = fullClipColor;
+            StartCoroutine(Launch(reloadTime));
+            currentRocketsInClip = fullClip;
         }
     }
 
-    private IEnumerator reloading(float time)
-    {
-        yield return new WaitForSeconds(time);
-    }
 
-    //TODO:Вернуть к полю.
-    [System.Serializable]
-    public class RocketLauncherEvent : UnityEngine.Events.UnityEvent<float>
+    private IEnumerator Launch(float operationTime)
     {
-
+        GetComponent<LaunchRocketAnimation>().ReloadingOperation(operationTime);
+        enabled = !enabled;
+        yield return new WaitForSeconds(operationTime);
+        enabled = !enabled;
+        GetComponent<LaunchRocketAnimation>().ReloadingOperation(operationTime);
     }
 }
 
