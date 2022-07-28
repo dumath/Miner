@@ -690,7 +690,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 220.3, y: 68.5}
+  m_AnchoredPosition: {x: 233.9, y: 63.7}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &610697228
@@ -713,7 +713,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c226c88cadd2fac489635f4fdcdaff73, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5a3c02f7c6ff4034ebf54520767aad95, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -744,7 +744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fullClip: 4
-  currentRocketsInClip: 0
+  currentMissilesInClip: 0
   reloadTime: 10
   preparationTime: 5
   emptyClipColor: {r: 1, g: 0, b: 0, a: 1}
@@ -2065,7 +2065,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -6766,7 +6766,6 @@ GameObject:
   - component: {fileID: 1668838243}
   - component: {fileID: 1668838245}
   - component: {fileID: 1668838244}
-  - component: {fileID: 1668838248}
   m_Layer: 5
   m_Name: Stick
   m_TagString: Untagged
@@ -6808,7 +6807,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.00126791, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6833,22 +6832,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1668838242}
   m_CullTransparentMesh: 1
---- !u!58 &1668838248
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1668838242}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 50
 --- !u!1 &1686649130
 GameObject:
   m_ObjectHideFlags: 0
@@ -6978,7 +6961,6 @@ GameObject:
   - component: {fileID: 1835353882}
   - component: {fileID: 1835353881}
   - component: {fileID: 1835353880}
-  - component: {fileID: 1835353883}
   m_Layer: 5
   m_Name: SpeedSlider
   m_TagString: Untagged
@@ -7003,8 +6985,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 80, y: 170}
-  m_SizeDelta: {x: 120, y: 300}
+  m_AnchoredPosition: {x: 80, y: 218.3}
+  m_SizeDelta: {x: 120, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1835353880
 MonoBehaviour:
@@ -7018,8 +7000,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed0adfdec884c384592684221b7c9913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinimalColor: {r: 0, g: 1, b: 0.07058824, a: 0.40392157}
-  MaximalColor: {r: 1, g: 0, b: 0, a: 0.24705882}
+  MinimalColor: {r: 0, g: 1, b: 0.07058824, a: 1}
+  MaximalColor: {r: 1, g: 0, b: 0, a: 1}
   NullSpeedHeight: 60
   OnValueChange:
     m_PersistentCalls:
@@ -7068,7 +7050,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bbdaf3dff71ceb14186930df8844487d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c521692bbc3b5644db31a927a2e77f83, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7086,32 +7068,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1835353878}
   m_CullTransparentMesh: 1
---- !u!61 &1835353883
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1835353878}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 60, y: 400}
-  m_EdgeRadius: 0
 --- !u!1 &1893901095
 GameObject:
   m_ObjectHideFlags: 0
@@ -7423,8 +7379,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1821db4164249b64ca601ce8891a1589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.1
   engine: {fileID: 1635820830}
+  Speed: 0.1
 --- !u!4 &134406022244700654
 Transform:
   m_ObjectHideFlags: 0
@@ -7521,8 +7477,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1821db4164249b64ca601ce8891a1589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.1
   engine: {fileID: 0}
+  Speed: 0.1
 --- !u!33 &353412261022865870
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7619,8 +7575,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1821db4164249b64ca601ce8891a1589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.1
   engine: {fileID: 0}
+  Speed: 0.1
 --- !u!4 &3515323021652535024
 Transform:
   m_ObjectHideFlags: 0
@@ -7717,8 +7673,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1821db4164249b64ca601ce8891a1589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.1
   engine: {fileID: 0}
+  Speed: 0.1
 --- !u!1 &3877798882318568432
 GameObject:
   m_ObjectHideFlags: 0

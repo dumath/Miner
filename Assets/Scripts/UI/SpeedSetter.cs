@@ -43,7 +43,7 @@ public class SpeedSetter : MonoBehaviour, IDragHandler
 
     #region Methods
     /// <summary>
-    /// Обработчик события мыши. Перетаскивание. Изменяeт форму, скорость.
+    /// Обработчик события мыши. Перетаскивание. Изменяeт форму, цвет, скорость.
     /// </summary>
     /// <param name="eventData"> Данные события. </param>
     public void OnDrag(PointerEventData eventData)

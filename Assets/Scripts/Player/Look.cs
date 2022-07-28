@@ -38,7 +38,7 @@ public class Look : MonoBehaviour
     /// <param name="x"> Координата "Stick" по оси X. </param>
     public void LookSensativityX(float x)
     {
-        this.sensativityX = x;
+        this.sensativityX = x *Time.deltaTime;
     }
 
     /// <summary>
@@ -47,7 +47,7 @@ public class Look : MonoBehaviour
     /// <param name="y"> Координата "Stick" по оси Y. </param>
     public void LookSensativityY(float y)
     {
-        this.sensativityY = y;
+        this.sensativityY = y * Time.deltaTime;
     }
     #endregion
 }

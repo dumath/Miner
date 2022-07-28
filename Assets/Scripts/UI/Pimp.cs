@@ -82,8 +82,8 @@ public class Pimp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
     {
         if (sensativityYEvent.GetPersistentEventCount() == 0 && sensativityXEvent.GetPersistentEventCount() == 0)
             return;
-        sensativityXEvent.Invoke(sensativityX / Sensativity);
-        sensativityYEvent.Invoke(sensativityY / Sensativity);
+        sensativityXEvent.Invoke(sensativityX);
+        sensativityYEvent.Invoke(sensativityY);
     }
 
     /// <summary>

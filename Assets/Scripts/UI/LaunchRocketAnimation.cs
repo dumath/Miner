@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class LaunchRocketAnimation : MonoBehaviour
 {
-    private RectTransform missileLauncherButton;
-    private float leftEdge;
-    private bool isReloading = false;
-    private float currentMaxWidth;
-    private float currentWidth;
+    //Completed.
+    //TODO: Привести в упаковочный вид.
+
+    #region Fields
+    private RectTransform missileLauncherButton; // Поле доступа к свойствам формы.
+    private float leftEdge; // Левая грань формы.
+    private bool isReloading = false; // False - Ракета готова к запуску.
+    private float currentMaxWidth; // Максимальная ширина формы, задается в редакторе Unity.
+    private float currentWidth; // Текущая ширина формы. Момент перезарядки.
+    #endregion
+
+    #region Awake, Start, Update, LateUpdate
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +34,11 @@ public class LaunchRocketAnimation : MonoBehaviour
             missileLauncherButton.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, leftEdge, currentWidth);
         }
     }
+    #endregion
 
+    #region Methods
+    // TODO: Заменить идентификатор.
+    // TODO: Добавить описание.
     public void ReloadingOperation(float timeOperation)
     {
         if(isReloading)
@@ -36,6 +47,7 @@ public class LaunchRocketAnimation : MonoBehaviour
             return;
         }
         isReloading = !isReloading;
-        missileLauncherButton.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, leftEdge, 0.0f);
+        missileLauncherButton.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, leftEdge, 40.0f);
     }
+    #endregion
 }

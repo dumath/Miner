@@ -9,7 +9,7 @@ public class Clip : MonoBehaviour
     [SerializeField] private GameObject secondRocket;
     [SerializeField] private GameObject thirdRocket;
     [SerializeField] private GameObject fourthRocket;
-    private Vector3[] rocketsClip; //Будет ли грейдиться ?
+    private Vector3[] rocketsClip; //Будет ли грейдиться ? Массив позиций установки ракет.
     private int currentIndex;
     private UnityEngine.Events.UnityEvent<float> LaunchEvent;
     private float shipSpeed = 0.0f;
@@ -31,7 +31,7 @@ public class Clip : MonoBehaviour
     public void Launching()
     {
         GameObject newR = Instantiate(firstRocket, firstRocket.transform.position, firstRocket.transform.rotation);
-        LaunchEvent.AddListener(newR.GetComponent<Rocket>().Launch);
+        LaunchEvent.AddListener(newR.GetComponent<MissileTypeOne>().Launch);
         LaunchEvent.Invoke(shipSpeed);
         StartCoroutine(DestoyMissile(newR));
     }

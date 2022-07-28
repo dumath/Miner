@@ -6,20 +6,25 @@ using UnityEngine.UI;
 
 public class LaunchRocketButton : MonoBehaviour, IPointerClickHandler
 {
-    //DEBUG
-    public int fullClip = 4; // Полная обойма.
-    public int currentRocketsInClip; // Сколько осталось в обойме.
-    public float reloadTime = 10.0f; // Время перезарядки.
-    public float preparationTime = 5.0f; // Время подготовки ракеты после выпуска.
-    private Image clipSkin; //Изображение обоймы в UI.
+    //Completed.
+    //TODO: Привести в упаковочный вид.
+
+    #region Fields
+    public int fullClip = 4; // Полностью заряженная обойма.
+    public int currentMissilesInClip; // Количество ракет, оставшееся в обойме.
+    public float reloadTime = 10.0f; // Время перезарядки обоймы.
+    public float preparationTime = 5.0f; // Время подготовки ракеты после выпуска(обойма не пустая).
+    private Image clipSkin; // Изображение обоймы в UI.
     public Color emptyClipColor; // Цвет пустой обоймы.
     public Color fullClipColor; // Цвет полной обоймы.
     [SerializeField] private UnityEngine.Events.UnityEvent LaunchEvent; // Связанное событие с Click.
+    #endregion
 
+    #region Awake, Start, Update, LateUpdate
     // Start is called before the first frame update
     void Start()
     {
-        currentRocketsInClip = fullClip;
+        currentMissilesInClip = fullClip;
         clipSkin = GetComponent<Image>();
     }
 
@@ -28,25 +33,35 @@ public class LaunchRocketButton : MonoBehaviour, IPointerClickHandler
     {
         
     }
+    #endregion
 
+    #region Methods
+    /// <summary>
+    /// Метод запускает ракету, если обойма не пустая, при щелчке мыши на объекте "Clip" в UI.
+    /// </summary>
+    /// <param name="eventData"> Данные события мыши. </param>
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (currentRocketsInClip != 0)
+        if (currentMissilesInClip != 0)
         {
             LaunchEvent.Invoke();
-            clipSkin.color = Color.Lerp(fullClipColor, emptyClipColor, 1.0f / currentRocketsInClip);
+            clipSkin.color = Color.Lerp(fullClipColor, emptyClipColor, 1.0f / currentMissilesInClip);
             StartCoroutine(Launch(preparationTime));
-            currentRocketsInClip--;
+            currentMissilesInClip--;
         }
         else
         {
             clipSkin.color = fullClipColor;
             StartCoroutine(Launch(reloadTime));
-            currentRocketsInClip = fullClip;
+            currentMissilesInClip = fullClip;
         }
     }
 
-
+    /// <summary>
+    /// Метод запускает Анимацию(script.cs) подготовки/перезаяодки ракеты.
+    /// </summary>
+    /// <param name="operationTime"> Временной интервал подготовки или перезарядки ракеты. </param>
+    /// <returns> Итератор короутины. </returns>
     private IEnumerator Launch(float operationTime)
     {
         GetComponent<LaunchRocketAnimation>().ReloadingOperation(operationTime);
@@ -55,6 +70,7 @@ public class LaunchRocketButton : MonoBehaviour, IPointerClickHandler
         enabled = !enabled;
         GetComponent<LaunchRocketAnimation>().ReloadingOperation(operationTime);
     }
+    #endregion
 }
 
 
