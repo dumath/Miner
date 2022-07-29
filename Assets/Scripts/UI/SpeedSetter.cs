@@ -5,7 +5,8 @@ using UnityEngine.EventSystems;
 public class SpeedSetter : MonoBehaviour, IDragHandler
 {
     //Completed.
-    //TODO: Привести в упаковочный вид.
+    // TODO: Добавить остановку в 0.
+    // TODO: Привести в упаковочный вид.
 
     #region Fields
     private Image sliderColor; // Палитра скорости, при разных значениях меняет цвет.
@@ -54,7 +55,7 @@ public class SpeedSetter : MonoBehaviour, IDragHandler
         if (currentMousePositionY > minHeightDrag && currentMousePositionY < maxHeightDrag)
         {
             slider.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Bottom, bottomEdge, currentMousePositionY);
-            OnValueChange.Invoke(currentMousePositionY - NullSpeedHeight);
+            OnValueChange.Invoke(slider.rect.height );
         }
     }
     #endregion
